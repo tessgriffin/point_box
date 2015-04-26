@@ -66,6 +66,14 @@ feature 'User views dashboard' do
     }.to raise_error(ActionController::RoutingError)
   end
 
+  xscenario "user sees purchased rewards" do 
+    Reward.create!()
+    non_admin_user = User.create!(email: "blah", password: "anything", admin: false)
+
+    sign_in_as(non_admin_user)
+    visit dashboard_path
+  end
+
   private
 
   def add_point_to(user)

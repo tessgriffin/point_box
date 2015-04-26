@@ -1,5 +1,9 @@
 <% unless current_user.admin? %>
   You have <%= pluralize(current_user.unredeemed_points_count, "point") %>
+  <% current_user.redeemed_rewards.each do |reward| %>
+    <%= reward.name %>
+    <%= reward.description %>
+  <% end %>
 <% end %>
 
 <% if current_user.admin? %>

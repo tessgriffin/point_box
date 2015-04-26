@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, if: :new_record?
 
   has_many :points
+  has_many :redeemed_rewards, through: :points
 
   def password=(password)
     @password = password
@@ -20,6 +21,10 @@ class User < ActiveRecord::Base
 
   def unredeemed_points_count
     points.unredeemed.size
+  end
+
+  def unredeemed_points
+    points.unredeemed
   end
 
   def self.authenticate(params)

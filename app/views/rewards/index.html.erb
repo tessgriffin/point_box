@@ -1,6 +1,10 @@
 <% @rewards.each do |reward| %>
   <%= reward.name %>
   <%= reward.description %>
+  <% if current_user.admin? %>
+    <%= link_to "Update reward", edit_reward_path(reward) %>
+    <%= link_to "Delete reward", reward_path(reward), method: :delete %>
+  <% end %> 
   <% if current_user.unredeemed_points.any? %>
     <%= link_to "Redeem point", reward_redemptions_path(reward), method: :post %>
   <% end %>

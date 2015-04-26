@@ -42,12 +42,33 @@ feature "User signs up" do
     sign_up_new_user
 
     click_on "Sign Out"
-    click_on "Sign In"
+    click_link "Sign In"
 
     fill_out_auth_form
     submit_sign_in
 
     expect(page).to show_that_user_is_signed_in
+  end
+
+  scenario "must have unique email" do
+    User.create!(email: "user@example.com", password: "omglol")
+    sign_up_new_user(email: "user@example.com", password: "different")
+
+    expect(page).to show_that_user_is_signed_out
+    expect(page).to have_content("already been taken")
+  end
+
+  scenario "must sign in with correct password" do 
+    sign_up_new_user(email: "user@example.com", password: "test")
+
+    click_on "Sign Out"
+    visit sign_in_path
+
+    fill_out_auth_form(email: "user@example.com", password: "not")
+    submit_sign_in
+
+    expect(page).to show_that_user_is_signed_out
+    expect(page).to have_content("Incorrect email or password")
   end
 
   private
@@ -56,25 +77,6 @@ feature "User signs up" do
     visit sign_up_path
     fill_out_auth_form(**kwargs)
     submit_sign_up
-  end
-
-  def fill_out_auth_form(email: "user@example.com")
-    within("form") do
-      fill_in "Email", with: email
-      fill_in "Password", with: "password"
-    end
-  end
-
-  def submit_sign_up
-    within("form") do
-      click_on "Sign Up"
-    end
-  end
-
-  def submit_sign_in
-    within("form") do
-      click_on "Sign In"
-    end
   end
 
   def show_that_user_is_signed_in

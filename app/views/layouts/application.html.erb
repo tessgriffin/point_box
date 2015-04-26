@@ -8,6 +8,7 @@
 </head>
 <body>
   <%= flash[:notice] %>
+  <%= flash[:error] %>
 
   <% if signed_in? %>
     <%= current_user.email %>

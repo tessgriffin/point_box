@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates :encrypted_password, presence: true
   validates :password, presence: true, if: :new_record?
 
+  has_many :points
+
   def password=(password)
     @password = password
     self.encrypted_password = BCrypt::Password.create(password)
@@ -14,6 +16,10 @@ class User < ActiveRecord::Base
     if super
       BCrypt::Password.new(super)
     end
+  end
+
+  def unredeemed_points_count
+    points.unredeemed.size
   end
 
   def self.authenticate(params)

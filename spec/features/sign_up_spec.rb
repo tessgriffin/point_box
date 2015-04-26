@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 feature "User signs up" do
+  include AuthHelpers
+
   scenario "successfully" do
     visit root_path
     click_on "Sign Up"

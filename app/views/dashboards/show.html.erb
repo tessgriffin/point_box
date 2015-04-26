@@ -1,0 +1,11 @@
+<% unless current_user.admin? %>
+  You have <%= pluralize(current_user.unredeemed_points_count, "point") %>
+<% end %>
+
+<% if current_user.admin? %>
+  <div class="user-points">
+    <% @users.each do |user| %>
+      <%= link_to user.email, user_points_path(user) %>
+    <% end %>
+  </div>
+<% end %>

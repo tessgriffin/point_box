@@ -6,5 +6,11 @@ Rails.application.routes.draw do
   post '/sign_in' => 'sessions#create'
 
   delete '/sign_out' => 'sessions#destroy'
-  root to: 'application#show'
+
+  resource :dashboard, only: :show
+  resources :users, only: [] do
+    resources :points, only: [:index, :create]
+  end
+
+  root to: 'dashboards#show'
 end

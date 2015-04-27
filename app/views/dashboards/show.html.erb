@@ -1,10 +1,15 @@
 <% unless current_user.admin? %>
-  You have <%= pluralize(current_user.unredeemed_points_count, "point") %>
+  <p>You have <%= pluralize(current_user.unredeemed_points_count, "point") %></p>
+  <h2>Rewards:</h2>
+  <ul>
   <% current_user.redeemed_rewards.each do |reward| %>
-    <%= reward.name %>
-    <%= reward.description %>
+    <li><%= reward.name %></li>
+    <p><%= reward.description %></p>
   <% end %>
+  </ul>
 <% end %>
+
+<%= link_to "Rewards Index", rewards_path, class: ['button', 'button-primary'] %>
 
 <% if current_user.admin? %>
   <div class="user-points">

@@ -1,15 +1,19 @@
+<h1>All Available Rewards</h1>
+<ul>
 <% @rewards.each do |reward| %>
-  <%= reward.name %>
-  <%= reward.description %>
+  <li><%= reward.name %></li>
+  <p><%= reward.description %></p>
   <% if current_user.admin? %>
-    <%= link_to "Update reward", edit_reward_path(reward) %>
-    <%= link_to "Delete reward", reward_path(reward), method: :delete %>
+    <p><%= link_to "Update reward", edit_reward_path(reward), class: "button" %></p>
+    <p><%= link_to "Delete reward", reward_path(reward), method: :delete, class: "button" %></p>
   <% end %> 
   <% if current_user.unredeemed_points.any? %>
-    <%= link_to "Redeem point", reward_redemptions_path(reward), method: :post %>
+    <p><%= link_to "Redeem point", reward_redemptions_path(reward), method: :post, class: ['button', 'button-primary'] %></p>
   <% end %>
 <% end %>
-
+</ul>
 <% if current_user.admin? %>
   <%= link_to "Create reward", new_reward_path %>
+<% else %>
+  <%= link_to "Back to Dashboard", dashboard_path, class: ['button', 'button-primary'] %>
 <% end %> 

@@ -1,20 +1,38 @@
 <% unless current_user.admin? %>
   <p>You have <%= pluralize(current_user.unredeemed_points_count, "point") %></p>
-  <h2>Rewards:</h2>
+  <h2>Accumulated Rewards:</h2>
   <ul>
   <% current_user.redeemed_rewards.each do |reward| %>
-    <li><%= reward.name %></li>
-    <p><%= reward.description %></p>
+    <div class="row">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= reward.name %></td>
+          <td><%= reward.description %></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
   <% end %>
   </ul>
 <% end %>
-
-<%= link_to "Rewards Index", rewards_path, class: ['button', 'button-primary'] %>
+<br>
 
 <% if current_user.admin? %>
   <div class="user-points">
-    <% @users.each do |user| %>
-      <%= link_to user.email, user_points_path(user) %>
-    <% end %>
+  <h3>Users:</h3>
+    <ul>
+      <% @users.each do |user| %>
+        <li><%= link_to user.email, user_points_path(user) %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
+
+<%= link_to "Rewards Index", rewards_path, class: ['button', 'button-primary'] %><br>

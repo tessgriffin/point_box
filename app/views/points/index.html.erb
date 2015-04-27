@@ -1,1 +1,3 @@
-<%= button_to "Add point", user_points_path(@user), method: :post %>
+<p>The user <%= @user.email %> has <%= @user.unredeemed_points.size %> unredeemed points</p>
+<%= button_to "Add point", user_points_path(@user), method: :post %><br>
+<%= link_to "Back to Dashboard", dashboard_path, class: ['button'] %>

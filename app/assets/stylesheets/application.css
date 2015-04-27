@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: #DDE6A1;
+}
+
+.container {
+
+  background-color: #F0F0D8;
+  padding: 10px;
+}
+
+.button.button-primary {
+  background-color: #303030;
+  border-color: #303030;
+}
+
+.button.button-primary:hover {
+  background-color: #A8C060;
+  border-color: #A8C060;
+  color: #000;
+}
+
+a {
+  color: #303030;
+}
+
+a:hover {
+  color: #A8C060;
+}

@@ -7,17 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= params[:controller] %>-<%= params[:action] %>">
+  <div class="nav">
+    <ul>
+      <% if signed_in? %>
+      <li><%= link_to "Sign Out", sign_out_path, method: :delete %></li>
+      <li><%= link_to current_user.email, dashboard_path %></li>
+    <% else %>
+      <li><%= link_to "Sign Up", sign_up_path %></li>
+      <li><%= link_to "Sign In", sign_in_path %></li>
+    <% end %>
+    </ul>
+  </div>
 <div class="container">
   <%= flash[:notice] %>
   <%= flash[:error] %>
 
-  <% if signed_in? %>
+<!--   <% if signed_in? %>
     <%= current_user.email %>
     <%= link_to "Sign Out", sign_out_path, method: :delete %>
   <% else %>
     <%= link_to "Sign Up", sign_up_path %>
     <%= link_to "Sign In", sign_in_path %>
-  <% end %>
+  <% end %> -->
 
   <%= yield %>
 </div>

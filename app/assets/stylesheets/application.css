@@ -19,14 +19,9 @@ body {
 }
 
 .container {
-
+  margin-top: 50px;
   background-color: #F0F0D8;
   padding: 10px;
-}
-
-.button.button-primary {
-  background-color: #303030;
-  border-color: #303030;
 }
 
 .button.button-primary:hover {
@@ -41,4 +36,46 @@ a {
 
 a:hover {
   color: #A8C060;
+}
+
+.nav {
+    background-color: #303030;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+  }
+
+.nav ul {
+    overflow: auto;
+    width: 90%;
+    margin: 0 auto;
+    list-style: none;
+    text-align: center;
+  }
+
+.nav li {
+  padding: 1.5%;
+}
+
+.nav li {
+    float: left;
+  }
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  color: #A8C060;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
 }
